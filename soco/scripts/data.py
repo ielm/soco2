@@ -114,13 +114,3 @@ def write_data(_data: list, mode: str = "SIMPLE", feature_list: list = []):
         build_class_set(ftest, f"{filepath}/test/f/", debug=True)
         build_class_set(mtest, f"{filepath}/test/m/", debug=True)
         build_class_set(btest, f"{filepath}/test/b/", debug=True)
-
-
-if __name__ == '__main__':
-    with open('../../data/gender-classifier-DFE-791531.csv', 'rt') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
-        data = []
-        for row in reader:
-            data.append(row)
-
-        write_data(data)
