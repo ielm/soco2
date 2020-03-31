@@ -11,7 +11,7 @@ def soco(ctx):
     """Central application entry point for SoCo Homework III"""
     click.echo("\nGender Classification - Homework III Social Computing"
                "\n\t\t\tAuthor: Ivan Leon"
-               "\n\t\t\tProfessor: Tomek Strzalkowski\n")
+               "\n\t\t\tProfessor: Tomek Strzalkowski")
 
 
 @soco.command()
@@ -20,7 +20,7 @@ def soco(ctx):
               prompt="\nThis will remove and replace everything in your data working directory. \nAre you okay with this?")
 @click.pass_context
 def build(ctx, agree: bool):
-    """Clean the data directory and rebuild data."""
+    """Clean the data directory and rebuild data"""
     if agree:
         print("\nCleaning data directory")
         clean_data_dir()
