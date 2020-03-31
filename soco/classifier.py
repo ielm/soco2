@@ -14,8 +14,8 @@ from keras.models import model_from_json
 from keras.initializers import Constant
 
 BASE_DIR = ''
-GLOVE_DIR = os.path.join(BASE_DIR, '../data/glove.6B')
-TEXT_DATA_DIR = os.path.join(BASE_DIR, '../data/gender/simple')
+GLOVE_DIR = os.path.join(BASE_DIR, '/Users/ivan/Dropbox/Code/soco2/data/glove.6B')
+TEXT_DATA_DIR = os.path.join(BASE_DIR, '/Users/ivan/Dropbox/Code/soco2/data/gender/simple')
 MAX_SEQUENCE_LENGTH = 1000
 MAX_NUM_WORDS = 20000
 EMBEDDING_DIM = 200
@@ -30,7 +30,7 @@ def index_word_vectors():
             word, coefs = line.split(maxsplit=1)
             coefs = np.fromstring(coefs, 'f', sep=' ')
             embeddings_index[word] = coefs
-    print('Found %s word vectors.' % len(embeddings_index))
+    print(f"Found {len(embeddings_index)} word vectors.")
     return embeddings_index
 
 
@@ -56,7 +56,7 @@ def process_text(data_dir=TEXT_DATA_DIR):
                             t = t[i:]
                         texts.append(t)
                     labels.append(label_id)
-    print( 'Found %s texts.' % len(texts))
+    print(f"Found {len(texts)} texts.")
     return texts, labels_index, labels
 
 
@@ -66,7 +66,7 @@ def vectorize(texts):
     sequences = tokenizer.texts_to_sequences(texts)
 
     word_index = tokenizer.word_index
-    print('Found %s unique tokens.' % len(word_index))
+    print(f"Found {len(word_index)} unique tokens.")
     return sequences, word_index
 
 
@@ -154,9 +154,11 @@ def fit_model(save: bool = True):
               batch_size=128,
               epochs=20,
               validation_data=(x_val, y_val))
-    model.evaluate(x=x_val,
-                   y=y_val,
-                   batch_size=128)
+    loss, accuracy = model.evaluate(x=x_val,
+                                    y=y_val,
+                                    batch_size=128)
+    print(f"Loss: {int(loss)}")
+    print(f"Accuracy: {int(accuracy * 100)}")
     if save:
         serialize_to_json(model)
     return model
@@ -172,7 +174,7 @@ def serialize_to_json(model):
     print("Saved model to disk")
 
 
-def load_from_json(path: str = "../model/gender"):
+def load_from_json(path: str = "/Users/ivan/Dropbox/Code/soco2/model/gender"):
     # load json and create model
     if os.path.exists(f"{path}/model.json"):
         json_file = open(f"{path}/model.json", 'r')
@@ -190,4 +192,4 @@ def load_from_json(path: str = "../model/gender"):
 
 
 if __name__ == '__main__':
-    classifier = fit_model()
+    classifier = fit_conv1d_model()
