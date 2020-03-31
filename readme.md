@@ -7,25 +7,24 @@ Installing GloVe
 ----------------
 Download and unzip the [GloVe pretrained word vectors](http://nlp.stanford.edu/data/glove.6B.zip) in `/soco2/model/gender/`
 
-
 Usage
 -----
-# For usage instructions, run
+For usage instructions, run
 ```shell script
 $ python soco.py --help
 ```
-# To build the data directories
 
+To build the data directories
 ```shell script
 $ python soco.py build
 ```
 
-# To train the model
+To train the model
 ```shell script
 $ python soco.py train
 ```
 
-# To evaluate the model
+To evaluate the model
 ```shell script
 $ python soco.py evaluate
 ```
